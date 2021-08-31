@@ -10,15 +10,21 @@ describe('kumpulan test case', function(){
 
         cy.get('#userNumber').type('0881234556').should('have.value', '0881234556')
 
-        cy.get('#dateOfBirthInput').should('be.visible').click()
+        cy.get('#dateOfBirthInput').invoke('val', '17 Dec 2017')
         
-        cy.get('.subjects-auto-complete__value-container').should('not.be.visible').type('Computer Science').should('have.value', 'Computer Science')
+        cy.get('.subjects-auto-complete__value-container').type('Art{enter}Comp{enter}Mat{enter}', { delay: 500 })
 
         cy.get('[type="checkbox"]').check(['1', '3'], { force: true }).should('be.checked')
+
+        cy.get('#uploadPicture').should('have.id', 'uploadPicture').attachFile('Cosmos.jpg')
 
 
         cy.get('#currentAddress').type('Jalan Melati nomor 42').should('have.value', 'Jalan Melati nomor 42')
 
+        cy.get('#stateCity-wrapper > :nth-child(2)').should('be.visible').type('Hary{enter}').should('have.class', 'col-md-4 col-sm-12')
+        cy.get('#stateCity-wrapper > :nth-child(3)').should('be.visible').type('Pani{enter}').should('have.class', 'col-md-4 col-sm-12')
+
+        cy.get('#submit').should('have.text', 'Submit').click()
 
     })
     
